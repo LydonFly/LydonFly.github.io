@@ -253,6 +253,129 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/28/python通过rospy连接Vrep/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LydonFly">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of lydon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/28/python通过rospy连接Vrep/" itemprop="url">python通过rospy连接Vrep</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-28T14:56:15+08:00">
+                2017-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p>我这里使用vrep里的一个简单的ros场景来进行实验。主要的内容是通过一个旋转的摄像头，将拍摄到的东西通过ros传递给另外一个摄像头，让其显示出来的东西也和旋转摄像头拍摄的一样。</p>
+<p>首先在Vrep中打开rosInterfaceTopicPublisherAndSubscriber场景。里面有一个Vision_sensor和Passive_sensor传感器，我们需要将Vison_sensor的数据传输到Passive_sensor中。</p>
+<p>修改脚本文件。原先的这个场景是Vrep直接在脚本中将数据进行传输，而我们要做的是要将数据传输到我们的python脚本里，然后再重新传输给Vrep中的PassiveVIsion传感器。</p>
+<p>##Vrep脚本代码编写<br>主要修改的只是脚本里的初始化函数的东西而已。</p>
+<p>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">activeVisionSensor=simGetObjectHandle(&apos;Vision_sensor&apos;)</div><div class="line"></div><div class="line">   passiveVisionSensor=simGetObjectHandle(&apos;PassiveVision_sensor&apos;)</div><div class="line"></div><div class="line">   objectHandle=simGetObjectAssociatedWithScript(sim_handle_self)</div><div class="line">   objectName=simGetObjectName(objectHandle)</div><div class="line">   -- Check if the required RosInterface is there:</div><div class="line">   moduleName=0</div><div class="line">   index=0</div><div class="line">   rosInterfacePresent=false</div><div class="line">   while moduleName do</div><div class="line">       moduleName=simGetModuleName(index)</div><div class="line">       if (moduleName==&apos;RosInterface&apos;) then</div><div class="line">           rosInterfacePresent=true</div><div class="line">       end</div><div class="line">       index=index+1</div><div class="line">   end</div><div class="line">   </div><div class="line">   if rosInterfacePresent then</div><div class="line">   -- Enable an image publisher and subscriber:</div><div class="line">       pub=simExtRosInterface_advertise(&apos;/image&apos;, &apos;sensor_msgs/Image&apos;)</div><div class="line">       simExtRosInterface_publisherTreatUInt8ArrayAsString(pub) -- treat uint8 arrays as strings (much faster, tables/arrays are kind of slow in Lua)</div><div class="line">       sub=simExtRosInterface_subscribe(&apos;/passivevision&apos;, &apos;sensor_msgs/Image&apos;, &apos;imageMessage_callback&apos;)</div><div class="line">       simExtRosInterface_subscriberTreatUInt8ArrayAsString(sub) -- treat uint8 arrays as strings (much faster, tables/arrays are kind of slow in Lua)</div><div class="line">   end</div></pre></td></tr></table></figure></p>
+<p>这块代码主要是要检测出是否使用了RosInterface这个API，如果使用了，就创建一个topic Publisher，这个Publisher是用于VIsion_sensor传输数据给python脚本。然后创建一个subscriber用于Passive_sensor接收从python传输的数据。</p>
+<p><code>simExtRosInterface_advertise(&#39;/image&#39;, &#39;sensor_msgs/Image&#39;)</code>这段代码就是创建topic Publisher的，注意括号中的参数，第一个是topic name，这个名字要和python脚本中的subscriber是一样的，个人觉得他是从这个名字来进行匹配的。第二个参数是传输数据的类型</p>
+<p><code>simExtRosInterface_subscribe(&#39;/passivevision&#39;, &#39;sensor_msgs/Image&#39;, &#39;imageMessage_callback&#39;)</code>是创建一个subscriber来接收数据的，第一个参数也是topic name，第二个参数是接收数据的类型，第三个参数是回调函数，接收到数据后要干什么就在这个回调函数中进行。</p>
+<p>###python脚本的编写。<br>这一块的代码很简单，不到20行就搞定了。通过python通过rospy这个库来与Vrep的rosAPI接口进行相连。</p>
+<p>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import rospy</div><div class="line">from sensor_msgs.msg import Image</div><div class="line">from collections import deque</div><div class="line"></div><div class="line">def camera_callback(msg):</div><div class="line">    fifo.append(msg)</div><div class="line">    return</div><div class="line">rospy.init_node(&apos;camera_ros&apos;)</div><div class="line">fifo = deque()</div><div class="line">count = 0</div><div class="line">camera1 = rospy.Subscriber(&apos;/image&apos;, Image, camera_callback)</div><div class="line">while True:</div><div class="line">    camera2 = rospy.Publisher(&apos;/passivevision&apos;, Image, queue_size=1)</div><div class="line">    if len(fifo) == 0:</div><div class="line">        continue</div><div class="line">    else:</div><div class="line">        camera2.publish(fifo.popleft())</div></pre></td></tr></table></figure></p>
+<p><code>from sensor_msgs.msg import Image</code>是Vrep里传出数据的类型，而我们要接收和重新传输回去的话也是需要同样的这种格式。<br><code>camera1 = rospy.Subscriber(&#39;/image&#39;, Image, camera_callback)</code>是使用rospy创建一个subscriber，Vrep传输的数据，这里第一个参数要和Vrep里面的Publisher的第一个参数一致，第三个参数是回调函数，从函数中可以看出代码里是将接收到的数据放在一个双端队列里面保存起来。<br><code>camera2 = rospy.Publisher(&#39;/passivevision&#39;, Image, queue_size=1)</code>是用来将保存在队列里的数据传输回去给Vrep的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/hexo-github搭建博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -526,7 +649,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
