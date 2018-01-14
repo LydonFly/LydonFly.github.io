@@ -93,16 +93,12 @@
 
 
 
-<meta name="description" content="hexo+github搭建博客">
-<meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github搭建博客">
-<meta property="og:url" content="http://yoursite.com/2017/07/31/hexo-github搭建博客/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog of lydon">
+<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
 <meta property="og:site_name" content="Blog of lydon">
-<meta property="og:description" content="hexo+github搭建博客">
-<meta property="og:updated_time" content="2017-07-31T12:48:40.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo+github搭建博客">
-<meta name="twitter:description" content="hexo+github搭建博客">
+<meta name="twitter:title" content="Blog of lydon">
 
 
 
@@ -130,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/31/hexo-github搭建博客/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/"/>
 
 
 
 
 
-  <title>hexo+github搭建博客 | Blog of lydon</title>
+  <title>Archive | Blog of lydon</title>
   
 
 
@@ -161,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,183 +241,66 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/hexo-github搭建博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LydonFly">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of lydon">
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      Um..! 5 posts in total. Keep on posting.
     </span>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">hexo+github搭建博客</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-31T20:20:48+08:00">
-                2017-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-              <div class="post-description">
-                  hexo+github搭建博客
-              </div>
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
 
       
       
-
       
-        <a id="more"></a> 
-<ol>
-<li><p>申请github账号，新建仓库，仓库用户名为用户名.github.io。</p>
-</li>
-<li><p>安装nodejs和git</p>
-<ul>
-<li>安装nodejs<br><code>sudo apt-get install nodejs</code><br><code>sudo apt-get install npm</code></li>
-<li>安装后的nodejs版本太低，要更新，先更新npm，再更新nodejs<br><code>sudo npm install -g npm</code><br>#此时会出现apt-get安装后没有添加链接#<br><code>ln -s /usr/bin/nodejs /usr/bin/node</code><br>#更新nodejs#<br><code>npm install -g n</code><br><code>sudo n stable</code></li>
-<li>安装git<br><code>sudo apt-get install git</code></li>
-<li>安装hexo<br><code>sudo npm install --unsafe-perm --verbose -g hexo</code></li>
-</ul>
-</li>
-<li><p>hexo使用</p>
-<ul>
-<li><p>创建博客文件夹<br><code>hexo init blog</code><br><code>cd blog</code><br><code>nom install</code>    #安装依赖</p>
-</li>
-<li><p>git配置<br>配置SHH key</p>
-<p><code>cd ~/.ssh</code> </p>
-<p>检查本机存在的SSH密钥，如果没找到，说明是第一次使用</p>
-<p><code>ssh-keygen -t rsa -C &quot;注册github的email&quot;</code></p>
-<p>连续敲三下回车，会在用户目录下生成一个文件，打开用户目录，找到<code>.shh\id_rsa.pub</code>文件，复制里面内容，到github个人设置里面的SSH and CPG keys，然后new一个SSH key。里面的title随便写，将复制的内容铁道key里面。测试是否成功可以用<code>ssh -T github@github.com</code>。成功之后还需要再配置</p>
-<p><code>git config --global user.name &quot;github用户名&quot;</code><br><code>git config --global user.email &quot;github的注册邮箱&quot;</code></p>
-<p>这样子就可以免密登录github</p>
-</li>
-<li><p>修改配置文件<br>讲blog下的<code>_config.yml</code>里面的Deployment部分进行修改<br><code>deploy:</code><br>   <code>type: git</code><br>   <code>repo: git@github.com:username/username.github.io.git</code><br>   <code>branch: master</code><br> type、repo、branch前面有两个空格，：后面有一个空格。</p>
-</li>
-<li><p>安装git插件<br><code>npm install hexo-deployer-git --save</code></p>
-</li>
-<li><p>hexo常用命令<br>新建博文<br><code>hexo new post &quot;博客文件名&quot;</code><br>编辑<code>/source/_post/博客文件名</code>，使用markdown语法。</p>
-<p>编辑完成后<br>生成静态页面<br><code>hexo g：hexo generate</code> #编译成静态文件<br>部署hexo<br><code>hexo d：hexo deploy</code>     #部署网站<br>可在本地服务器预览<br><code>hexo s：hexo server</code>     #本地运行<br>清除生成内容<br><code>hexo c：hexo clean</code>         #清空generate生成器的文件</p>
-</li>
-</ul>
-</li>
-</ol>
 
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/31/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/28/python通过rospy连接Vrep/" rel="prev" title="python通过rospy连接Vrep">
-                python通过rospy连接Vrep <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
         </div>
       
+      
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/01/14/vrep分辨率不适配/" itemprop="url">
+              
+                <span itemprop="name">vrep分辨率不适配</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-01-14T21:09:51+08:00"
+              content="2018-01-14" >
+          01-14
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -429,10 +308,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -611,9 +486,11 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   

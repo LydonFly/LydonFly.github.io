@@ -93,16 +93,16 @@
 
 
 
-<meta name="description" content="hexo+github搭建博客">
+<meta name="description" content="V-rep分辨率不适配当笔记本插上外接显示屏后，笔记本的分辨率跟你的外接显示屏的分辨率可能不一样。可能你是1080的，外接了一个2k或者是4k的显示器。 在打开了V-rep后，软件本身的配置可能会发生变化，它可能会配置为适合4K屏或者是2K屏的分辨率。 当你断开外接显示器之后，再打开Vrep的时候，你可能会发现，咦，Vrep的界面怎么变得超级大了，而且不会适配你当前的分辨率。这会让我们非常苦恼。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github搭建博客">
-<meta property="og:url" content="http://yoursite.com/2017/07/31/hexo-github搭建博客/index.html">
+<meta property="og:title" content="vrep分辨率不适配">
+<meta property="og:url" content="http://yoursite.com/2018/01/14/vrep分辨率不适配/index.html">
 <meta property="og:site_name" content="Blog of lydon">
-<meta property="og:description" content="hexo+github搭建博客">
-<meta property="og:updated_time" content="2017-07-31T12:48:40.642Z">
+<meta property="og:description" content="V-rep分辨率不适配当笔记本插上外接显示屏后，笔记本的分辨率跟你的外接显示屏的分辨率可能不一样。可能你是1080的，外接了一个2k或者是4k的显示器。 在打开了V-rep后，软件本身的配置可能会发生变化，它可能会配置为适合4K屏或者是2K屏的分辨率。 当你断开外接显示器之后，再打开Vrep的时候，你可能会发现，咦，Vrep的界面怎么变得超级大了，而且不会适配你当前的分辨率。这会让我们非常苦恼。">
+<meta property="og:updated_time" content="2018-01-14T13:18:43.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo+github搭建博客">
-<meta name="twitter:description" content="hexo+github搭建博客">
+<meta name="twitter:title" content="vrep分辨率不适配">
+<meta name="twitter:description" content="V-rep分辨率不适配当笔记本插上外接显示屏后，笔记本的分辨率跟你的外接显示屏的分辨率可能不一样。可能你是1080的，外接了一个2k或者是4k的显示器。 在打开了V-rep后，软件本身的配置可能会发生变化，它可能会配置为适合4K屏或者是2K屏的分辨率。 当你断开外接显示器之后，再打开Vrep的时候，你可能会发现，咦，Vrep的界面怎么变得超级大了，而且不会适配你当前的分辨率。这会让我们非常苦恼。">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/31/hexo-github搭建博客/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/14/vrep分辨率不适配/"/>
 
 
 
 
 
-  <title>hexo+github搭建博客 | Blog of lydon</title>
+  <title>vrep分辨率不适配 | Blog of lydon</title>
   
 
 
@@ -255,7 +255,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/hexo-github搭建博客/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/vrep分辨率不适配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LydonFly">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo+github搭建博客</h1>
+          <h1 class="post-title" itemprop="name headline">vrep分辨率不适配</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-31T20:20:48+08:00">
-                2017-07-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-14T21:09:51+08:00">
+                2018-01-14
               </time>
             
 
@@ -308,10 +308,6 @@
           
 
           
-              <div class="post-description">
-                  hexo+github搭建博客
-              </div>
-          
 
         </div>
       </header>
@@ -323,40 +319,17 @@
       
 
       
-        <a id="more"></a> 
-<ol>
-<li><p>申请github账号，新建仓库，仓库用户名为用户名.github.io。</p>
-</li>
-<li><p>安装nodejs和git</p>
-<ul>
-<li>安装nodejs<br><code>sudo apt-get install nodejs</code><br><code>sudo apt-get install npm</code></li>
-<li>安装后的nodejs版本太低，要更新，先更新npm，再更新nodejs<br><code>sudo npm install -g npm</code><br>#此时会出现apt-get安装后没有添加链接#<br><code>ln -s /usr/bin/nodejs /usr/bin/node</code><br>#更新nodejs#<br><code>npm install -g n</code><br><code>sudo n stable</code></li>
-<li>安装git<br><code>sudo apt-get install git</code></li>
-<li>安装hexo<br><code>sudo npm install --unsafe-perm --verbose -g hexo</code></li>
-</ul>
-</li>
-<li><p>hexo使用</p>
-<ul>
-<li><p>创建博客文件夹<br><code>hexo init blog</code><br><code>cd blog</code><br><code>nom install</code>    #安装依赖</p>
-</li>
-<li><p>git配置<br>配置SHH key</p>
-<p><code>cd ~/.ssh</code> </p>
-<p>检查本机存在的SSH密钥，如果没找到，说明是第一次使用</p>
-<p><code>ssh-keygen -t rsa -C &quot;注册github的email&quot;</code></p>
-<p>连续敲三下回车，会在用户目录下生成一个文件，打开用户目录，找到<code>.shh\id_rsa.pub</code>文件，复制里面内容，到github个人设置里面的SSH and CPG keys，然后new一个SSH key。里面的title随便写，将复制的内容铁道key里面。测试是否成功可以用<code>ssh -T github@github.com</code>。成功之后还需要再配置</p>
-<p><code>git config --global user.name &quot;github用户名&quot;</code><br><code>git config --global user.email &quot;github的注册邮箱&quot;</code></p>
-<p>这样子就可以免密登录github</p>
-</li>
-<li><p>修改配置文件<br>讲blog下的<code>_config.yml</code>里面的Deployment部分进行修改<br><code>deploy:</code><br>   <code>type: git</code><br>   <code>repo: git@github.com:username/username.github.io.git</code><br>   <code>branch: master</code><br> type、repo、branch前面有两个空格，：后面有一个空格。</p>
-</li>
-<li><p>安装git插件<br><code>npm install hexo-deployer-git --save</code></p>
-</li>
-<li><p>hexo常用命令<br>新建博文<br><code>hexo new post &quot;博客文件名&quot;</code><br>编辑<code>/source/_post/博客文件名</code>，使用markdown语法。</p>
-<p>编辑完成后<br>生成静态页面<br><code>hexo g：hexo generate</code> #编译成静态文件<br>部署hexo<br><code>hexo d：hexo deploy</code>     #部署网站<br>可在本地服务器预览<br><code>hexo s：hexo server</code>     #本地运行<br>清除生成内容<br><code>hexo c：hexo clean</code>         #清空generate生成器的文件</p>
-</li>
-</ul>
-</li>
-</ol>
+        <a id="more"></a>
+<h2 id="V-rep分辨率不适配"><a href="#V-rep分辨率不适配" class="headerlink" title="V-rep分辨率不适配"></a>V-rep分辨率不适配</h2><p>当笔记本插上外接显示屏后，笔记本的分辨率跟你的外接显示屏的分辨率可能不一样。可能你是1080的，外接了一个2k或者是4k的显示器。</p>
+<p>在打开了V-rep后，软件本身的配置可能会发生变化，它可能会配置为适合4K屏或者是2K屏的分辨率。</p>
+<p>当你断开外接显示器之后，再打开Vrep的时候，你可能会发现，咦，Vrep的界面怎么变得超级大了，而且不会适配你当前的分辨率。这会让我们非常苦恼。</p>
+<p>解决的办法如下：</p>
+<p>Vrep本身是有用户配置文件，里面就有关于Vrep的显示问题。</p>
+<p>配置的文件就在Vrep安装的路径下，然后打开system/usrset.txt。</p>
+<p>在这个配置文件中，有一个选项highResDisplay，这是关于显示的。</p>
+<p><code>highResDisplay = -1 // -1=automatic, 0=disabled, 1=enabled.</code></p>
+<p>从它的注释中我们可以看出，当value为-1的时候是自动适配。而当value为1的时候是固定下来的值。</p>
+<p>当你发现你的Vrep的分辨率不适配的时候，你看这个配置文件后你就会发现这里的highResDisplay对应的值是为1的。因此只需要改为-1就可以恢复了。</p>
 
       
     </div>
@@ -393,8 +366,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/31/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/12/25/ubuntu安装dropbox/" rel="next" title="ubuntu安装dropbox">
+                <i class="fa fa-chevron-left"></i> ubuntu安装dropbox
               </a>
             
           </div>
@@ -402,10 +375,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/28/python通过rospy连接Vrep/" rel="prev" title="python通过rospy连接Vrep">
-                python通过rospy连接Vrep <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,8 +422,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -498,6 +476,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#V-rep分辨率不适配"><span class="nav-number">1.</span> <span class="nav-text">V-rep分辨率不适配</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
